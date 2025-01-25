@@ -11,7 +11,7 @@ export default function App() {
     <SafeAreaView className="bg-primary h-full">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
         <View
-          className="w-full  items-center h-full px-4"
+          className="w-full mt-20 items-center h-full px-4"
           style={{ flexDirection: "column" }}
         >
           <Image
@@ -26,19 +26,23 @@ export default function App() {
           />
           <View className="relative mt-5">
             <Text className="text-3xl text-white font-bold text-center">
-              Discover the Power of AI with{" "}
+              Discover the Power of AI with
               <Text className="text-secondary-200 "> AORA</Text>
             </Text>
             <Image
               source={images.path}
-              className="w-[136px] h-[15px] absolute -bottom-3 right-24"
+              className="w-[136px] h-[15px] absolute -bottom-3 right-32"
               resizeMode="contain"
             />
           </View>
           <Text className="text-md font-pregular text-gray-100 mt-8 text-center">
             Harness the limitless power of Artificial Intelligence
           </Text>
-          <CustomButton />
+          <CustomButton
+            buttonText="Click me"
+            containerStyles="bg-secondary-200 px-4 rounded-xl min-h-[62px] justify-center items-center mt-8"
+            textStyles="font-bold"
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
