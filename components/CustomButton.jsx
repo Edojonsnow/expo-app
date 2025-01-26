@@ -10,11 +10,14 @@ const CustomButton = ({
 }) => {
   return (
     <TouchableOpacity
-      className={`${containerStyles}`}
+      className={`${containerStyles} ${isLoading ? "opacity-50" : ""}`}
       activeOpacity={0.8}
       onPress={handlePress}
+      disabled={isLoading}
     >
-      <Text className={`text-3xl text-white ${textStyles}`}>{buttonText}</Text>
+      <Text className={`text-lg font-psemibold text-primary  ${textStyles}`}>
+        {buttonText}
+      </Text>
     </TouchableOpacity>
   );
 };

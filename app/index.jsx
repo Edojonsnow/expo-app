@@ -1,4 +1,4 @@
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,7 +11,7 @@ export default function App() {
     <SafeAreaView className="bg-primary h-full">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
         <View
-          className="w-full mt-20 items-center h-full px-4"
+          className="w-full justify-center items-center min-h-[85vh] px-4"
           style={{ flexDirection: "column" }}
         >
           <Image
@@ -39,12 +39,16 @@ export default function App() {
             Harness the limitless power of Artificial Intelligence
           </Text>
           <CustomButton
-            buttonText="Click me"
-            containerStyles="bg-secondary-200 px-4 rounded-xl min-h-[62px] justify-center items-center mt-8"
-            textStyles="font-bold"
+            buttonText="Continue with email"
+            containerStyles="bg-secondary-200 px-4 rounded-xl min-h-[62px] justify-center items-center mt-8 w-full"
+            textStyles=""
+            handlePress={() => {
+              router.push("/sign-in");
+            }}
           />
         </View>
       </ScrollView>
+      <StatusBar style="light" backgroundColor="#161622" />
     </SafeAreaView>
   );
 }
