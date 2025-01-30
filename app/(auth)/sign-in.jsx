@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Image } from "react-native";
+import { View, Text, ScrollView, Image, Alert } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../../constants";
@@ -6,11 +6,37 @@ import FormField from "../../components/FormField";
 import { verifyInstallation } from "nativewind";
 import CustomButton from "../../components/CustomButton";
 import { Link, router } from "expo-router";
+import { signIn } from "../../lib/appwrite";
+import useStore from "../../store/useStore";
+
 const SignIn = () => {
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const { setIsLogged, setUser } = useStore((state) => ({
+    setIsLogged: state.setIsLogged,
+    setUser: state.setUser,
+  }));
+
+  const submit = async () => {
+    if (!form.email || !form.password) {
+      Alert.alert("Error", "Please fill all fields");
+    }
+    setIsSubmitting(true);
+
+    try {
+      const result = await signIn(form.email, form.password);
+
+      router.replace("/home");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   verifyInstallation();
 
@@ -47,7 +73,7 @@ const SignIn = () => {
             containerStyles="bg-secondary-200 px-4 rounded-xl min-h-[62px] justify-center items-center mt-8 w-full"
             textStyles=""
             handlePress={() => {
-              router.push("/sign-in");
+              submit();
             }}
           />
           <View className="flex flex-row justify-center items-center mt-4 gap-2">

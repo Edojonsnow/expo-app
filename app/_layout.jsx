@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { Slot, SplashScreen, Stack } from "expo-router";
 import "../global.css";
 import { useFonts } from "expo-font";
+import useStore from "../store/useStore";
 
 // SplashScreen.preventAutoHideAsync();
 
@@ -19,7 +20,10 @@ const RootLayout = () => {
     "Poppins-Thin": require("../assets/fonts/Poppins-Thin.ttf"),
   });
 
+  const initializeSession = useStore((state) => state.initializeSession);
+
   useEffect(() => {
+    initializeSession();
     if (error) throw error;
     if (fontsLoaded) SplashScreen.hideAsync;
   }, [fontsLoaded, error]);
