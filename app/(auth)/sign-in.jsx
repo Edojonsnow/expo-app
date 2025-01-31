@@ -7,7 +7,8 @@ import { verifyInstallation } from "nativewind";
 import CustomButton from "../../components/CustomButton";
 import { Link, router } from "expo-router";
 import { signIn } from "../../lib/appwrite";
-import useStore from "../../store/useStore";
+
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignIn = () => {
   const [form, setForm] = useState({
@@ -16,20 +17,19 @@ const SignIn = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { setIsLogged, setUser } = useStore((state) => ({
-    setIsLogged: state.setIsLogged,
-    setUser: state.setUser,
-  }));
+  const { user, isLogged, setIsLogged, setUser } = useGlobalContext();
 
   const submit = async () => {
     if (!form.email || !form.password) {
       Alert.alert("Error", "Please fill all fields");
+      return;
     }
     setIsSubmitting(true);
-
     try {
       const result = await signIn(form.email, form.password);
-
+      setIsLogged(true);
+      setUser(result);
+      Alert.alert("Success", "User signed in successfully");
       router.replace("/home");
     } catch (error) {
       Alert.alert("Error", error.message);
@@ -72,9 +72,7 @@ const SignIn = () => {
             buttonText="Sign In"
             containerStyles="bg-secondary-200 px-4 rounded-xl min-h-[62px] justify-center items-center mt-8 w-full"
             textStyles=""
-            handlePress={() => {
-              submit();
-            }}
+            handlePress={submit}
           />
           <View className="flex flex-row justify-center items-center mt-4 gap-2">
             <Text className="text-gray-200 justify-center text-center ">
