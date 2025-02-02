@@ -30,7 +30,7 @@ const GlobalProvider = ({ children }) => {
         setUser(currentUser);
         // await AsyncStorage.setItem("user", JSON.stringify(currentUser));
         // await AsyncStorage.setItem("isLogged", JSON.stringify(true));
-        console.log("User authenticated:", currentUser);
+        // console.log("User authenticated:", currentUser);
       } else {
         // Clear everything if no current user
         setIsLogged(false);
