@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { Stack } from "expo-router";
+import { Redirect, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useGlobalContext } from "../../context/GlobalProvider";
 

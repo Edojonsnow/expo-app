@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { getAccount, getCurrentUser } from "../lib/appwrite";
 
 const GlobalContext = createContext();
@@ -15,13 +15,13 @@ const GlobalProvider = ({ children }) => {
   const initializeAuth = async () => {
     try {
       // First try to load from AsyncStorage
-      const persistedUser = await AsyncStorage.getItem("user");
-      const persistedIsLogged = await AsyncStorage.getItem("isLogged");
+      // const persistedUser = await AsyncStorage.getItem("user");
+      // const persistedIsLogged = await AsyncStorage.getItem("isLogged");
 
-      if (persistedUser && persistedIsLogged) {
-        setUser(JSON.parse(persistedUser));
-        setIsLogged(JSON.parse(persistedIsLogged));
-      }
+      // if (persistedUser && persistedIsLogged) {
+      //   setUser(JSON.parse(persistedUser));
+      //   setIsLogged(JSON.parse(persistedIsLogged));
+      // }
 
       // Then verify with getCurrentUser
       const currentUser = await getAccount();
@@ -35,14 +35,14 @@ const GlobalProvider = ({ children }) => {
         // Clear everything if no current user
         setIsLogged(false);
         setUser(null);
-        await AsyncStorage.multiRemove(["user", "isLogged"]);
+        // await AsyncStorage.multiRemove(["user", "isLogged"]);
       }
     } catch (error) {
       console.error("Auth initialization error:", error);
       // Clear everything on error
       setIsLogged(false);
       setUser(null);
-      await AsyncStorage.multiRemove(["user", "isLogged"]);
+      // await AsyncStorage.multiRemove(["user", "isLogged"]);
     } finally {
       setLoading(false);
     }
@@ -53,10 +53,10 @@ const GlobalProvider = ({ children }) => {
     try {
       if (newUser) {
         setUser(newUser);
-        await AsyncStorage.setItem("user", JSON.stringify(newUser));
+        // await AsyncStorage.setItem("user", JSON.stringify(newUser));
       } else {
         setUser(null);
-        await AsyncStorage.removeItem("user");
+        // await AsyncStorage.removeItem("user");
       }
     } catch (error) {
       console.error("Error updating user:", error);
@@ -68,9 +68,9 @@ const GlobalProvider = ({ children }) => {
     try {
       setIsLogged(value);
       if (value) {
-        await AsyncStorage.setItem("isLogged", JSON.stringify(value));
+        // await AsyncStorage.setItem("isLogged", JSON.stringify(value));
       } else {
-        await AsyncStorage.removeItem("isLogged");
+        // await AsyncStorage.removeItem("isLogged");
       }
     } catch (error) {
       console.error("Error updating logged state:", error);

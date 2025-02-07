@@ -33,7 +33,7 @@ const SearchInput = ({
       ]}
     >
       <TextInput
-        className="text-base mt-0.5 text-white flex-1 font-pregular"
+        className="text-base text-white flex-1 font-pregular"
         placeholder="Search for anything"
         placeholderTextColor="#7b7b8b"
         selectionColor="#FF9001"
@@ -41,14 +41,11 @@ const SearchInput = ({
         value={value}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
+        style={{ textAlignVertical: "center" }}
         {...props}
       />
       <TouchableOpacity className="p-6">
-        <Image
-          source={icons.search}
-          className="w-9 h-9s"
-          resizeMode="contain"
-        />
+        <Image source={icons.search} style={{ width: 20, height: 20 }} />
       </TouchableOpacity>
     </View>
   );
@@ -59,10 +56,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   normalInput: {
-    borderColor: "#CDCDE0", // gray-100 from your config
+    borderColor: "#CDCDE0",
   },
   focusedInput: {
-    borderColor: "#FF9001", // secondary-100 from your config
+    borderColor: "#FF9001",
     borderWidth: 2,
   },
 });

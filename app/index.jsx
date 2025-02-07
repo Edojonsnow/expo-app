@@ -22,9 +22,9 @@ export default function App() {
           style={{ flexDirection: "column" }}
         >
           <Image
-            resizeMode="contain"
             source={images.logo}
             className="w-[130px] h-[84px]"
+            resizeMode="contain"
           />
           <Image
             source={images.cards}
@@ -47,7 +47,7 @@ export default function App() {
           </Text>
           <CustomButton
             buttonText="Continue with email"
-            containerStyles="bg-secondary-200 px-4 rounded-xl min-h-[62px] justify-center items-center mt-8 w-full"
+            containerStyles=""
             textStyles=""
             handlePress={() => {
               router.push("/sign-in");
