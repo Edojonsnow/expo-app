@@ -25,12 +25,9 @@ const SearchInput = ({
 
   return (
     <View
-      className={`flex flex-row items-center space-x-4 px-4 w-full justify-between   rounded-xl h-16 ${inputStyles}`}
-      style={[
-        styles.inputContainer,
-        isFocused ? styles.focusedInput : styles.normalInput,
-        { height: 60 },
-      ]}
+      className={`flex flex-row items-center space-x-4 w-full h-16 px-4 bg-black-100 rounded-2xl border ${
+        isFocused ? "border-secondary-100" : "border-white"
+      } `}
     >
       <TextInput
         className="text-base text-white flex-1 font-pregular"
@@ -38,30 +35,15 @@ const SearchInput = ({
         placeholderTextColor="#7b7b8b"
         selectionColor="#FF9001"
         onChangeText={handleChangeText}
-        value={value}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        style={{ textAlignVertical: "center" }}
         {...props}
       />
       <TouchableOpacity className="p-6">
-        <Image source={icons.search} style={{ width: 20, height: 20 }} />
+        <Image source={icons.search} className="w-5 h-5" resizeMode="contain" />
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  inputContainer: {
-    borderWidth: 1,
-  },
-  normalInput: {
-    borderColor: "#CDCDE0",
-  },
-  focusedInput: {
-    borderColor: "#FF9001",
-    borderWidth: 2,
-  },
-});
 
 export default SearchInput;
