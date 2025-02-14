@@ -1,6 +1,15 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ImageBackground,
+  Dimensions,
+} from "react-native";
 import React, { useState } from "react";
 import { icons } from "../constants";
+import { useVideoPlayer, VideoView } from "expo-video";
+import { useEvent } from "expo";
 
 const VideoCard = ({
   video: {
@@ -11,6 +20,17 @@ const VideoCard = ({
   },
 }) => {
   const [play, setplay] = useState(false);
+  const videoSource =
+    "https://cloud.appwrite.io/v1/storage/buckets/679b4fd200145714aa1a/files/67a89bd200177c40b032/view?project=679b4a2f000800e8c62f&mode=admin";
+
+  const player = useVideoPlayer(videoSource, (player) => {
+    // player.loop = true;
+    player.pause();
+  });
+
+  const { isPlaying } = useEvent(player, "playingChange", {
+    isPlaying: player.playing,
+  });
   return (
     <View className="flex-col items-center  mb-14 px-4">
       <View className="flex-row items-start gap-3">
@@ -41,25 +61,46 @@ const VideoCard = ({
           <Image source={icons.menu} className="w-5 h-5" resizeMode="contain" />
         </View>
       </View>
-      {play ? (
-        <Text className="text-white">Playing</Text>
-      ) : (
+      {!isPlaying ? (
         <TouchableOpacity
+          className=" w-full h-60  justify-center items-center"
           activeOpacity={0.7}
-          onPress={() => setplay(true)}
-          className="w-full h-60 rounded-lg justify-center items-center mt-3"
+          onPress={() => {
+            if (isPlaying) {
+              player.pause();
+            } else {
+              player.play();
+            }
+          }}
         >
           <Image
-            source={{ uri: thumbnail }}
-            className="w-full h-full rounded-xl mt-3"
+            source={{
+              uri: thumbnail,
+            }}
+            className="rounded-[35px] w-full h-full justify-center items-center mt-3"
             resizeMode="cover"
           />
+
           <Image
             source={icons.play}
             className="w-12 h-12 absolute"
             resizeMode="contain"
           />
         </TouchableOpacity>
+      ) : (
+        <VideoView
+          player={player}
+          className=" justify-center items-center  "
+          style={{
+            width: Dimensions.get("window").width * 0.9,
+            height: 200,
+            borderRadius: 35,
+            marginTop: 10,
+          }}
+          contentFit="cover"
+          allowsFullscreen
+          allowsPictureInPicture
+        />
       )}
     </View>
   );

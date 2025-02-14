@@ -56,8 +56,8 @@ const TrendingItem = ({ activeItem, item }) => {
       <View className="w-52 h-72 justify-center items-center flex-1 rounded-[35px] ">
         {!isPlaying ? (
           <TouchableOpacity
-            className="relative flex justify-center items-center"
-            activeOpacity={0.7}
+            className=" justify-center items-center"
+            // activeOpacity={0.7}
             onPress={() => {
               if (isPlaying) {
                 player.pause();
