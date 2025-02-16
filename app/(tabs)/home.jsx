@@ -8,6 +8,7 @@ import EmptyState from "../../components/EmptyState";
 import { getAllPosts, getLatestPosts } from "../../lib/appwrite";
 import useAppwrite from "../../lib/useAppwrite";
 import VideoCard from "../../components/VideoCard";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Home = () => {
   const { data: posts, loading, refetch } = useAppwrite(getAllPosts);
