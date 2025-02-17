@@ -13,6 +13,7 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 const Home = () => {
   const { data: posts, loading, refetch } = useAppwrite(getAllPosts);
   const { data: latestPosts } = useAppwrite(getLatestPosts);
+  const { user } = useGlobalContext();
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -24,20 +25,28 @@ const Home = () => {
     setTimeout(() => setRefreshing(false), 2000);
   };
 
-  // console.log(posts);
+  // console.log(user);
 
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
         data={posts}
         keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => <VideoCard video={item} />}
+        renderItem={({ item }) => (
+          <VideoCard
+            title={item.title}
+            thumbnail={item.thumbnail}
+            video={item.video}
+            avatar={item.creator.avatar}
+            username={item.creator.username}
+          />
+        )}
         ListHeaderComponent={() => (
           <View className="my-6 px-4">
             <View className="justify-between flex-row mb-6 items-start">
               <View>
                 <Text className="text-sm text-gray-100">Welcome Back </Text>
-                <Text className="text-2xl text-white">Edojonsnow</Text>
+                <Text className="text-2xl text-white">{user.username}</Text>
               </View>
               <View className="mt-1.5">
                 <Image

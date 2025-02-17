@@ -11,18 +11,9 @@ import { icons } from "../constants";
 import { useVideoPlayer, VideoView } from "expo-video";
 import { useEvent } from "expo";
 
-const VideoCard = ({
-  video: {
-    thumbnail,
-    title,
-    video,
-    creator: { username, avatar },
-  },
-}) => {
+const VideoCard = ({ thumbnail, title, video, username, avatar }) => {
   const [play, setplay] = useState(false);
-  const videoSource =
-    "https://cloud.appwrite.io/v1/storage/buckets/679b4fd200145714aa1a/files/67a89bd200177c40b032/view?project=679b4a2f000800e8c62f&mode=admin";
-
+  const videoSource = video;
   const player = useVideoPlayer(videoSource, (player) => {
     // player.loop = true;
     player.pause();

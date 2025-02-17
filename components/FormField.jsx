@@ -20,7 +20,7 @@ const FormField = ({
     <View className={`space-y-2 ${otherStyles}`}>
       <Text className={`text-white font-pmedium`}>{title}</Text>
       <View
-        className={`px-4  w-full  rounded-xl items-center justify-center ${inputStyles}`}
+        className={`px-4 mt-2 w-full  rounded-xl items-center justify-center ${inputStyles}`}
         style={[
           styles.inputContainer,
           isFocused ? styles.focusedInput : styles.normalInput,
@@ -28,7 +28,7 @@ const FormField = ({
         ]}
       >
         <TextInput
-          className="text-white text-2xl flex-1 font-psemibold w-full "
+          className={`text-white text-md flex-1  w-full`}
           placeholder={placeholder}
           placeholderTextColor="#7b7b8b"
           selectionColor="#FF9001"
